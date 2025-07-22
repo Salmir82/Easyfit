@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Dashboard Nutrizione</title>
+  <link rel="stylesheet" href="stile.css">
+</head>
+<body>
+  <h1>Dashboard Nutrizione</h1>
+  <form id="formDatiUtente">
+    <label>Sesso:
+      <select id="sesso">
+        <option value="maschio">Maschio</option>
+        <option value="femmina">Femmina</option>
+      </select>
+    </label><br>
+    <label>Età: <input type="number" id="eta" /></label><br>
+    <label>Altezza (cm): <input type="number" id="altezza" /></label><br>
+    <label>Peso (kg): <input type="number" id="peso" /></label><br>
+    <label>Attività fisica:
+      <select id="attivita">
+        <option value="sedentario">Sedentaria</option>
+        <option value="poco_attivo">Poco attiva</option>
+        <option value="moderatamente_attivo">Moderata</option>
+        <option value="molto_attivo">Molto attiva</option>
+      </select>
+    </label><br><br>
+  </form>
+
+  <h2>Questa settimana ho voglia di...</h2>
+  <form id="preferenzeForm">
+    <label>Frutta (4):</label><br>
+    <input type="text" class="frutta"><br><input type="text" class="frutta"><br><input type="text" class="frutta"><br><input type="text" class="frutta"><br>
+
+    <label>Verdura (5):</label><br>
+    <input type="text" class="verdura"><br><input type="text" class="verdura"><br><input type="text" class="verdura"><br><input type="text" class="verdura"><br><input type="text" class="verdura"><br>
+
+    <label>Cereali (2):</label><br>
+    <input type="text" class="cereali"><br><input type="text" class="cereali"><br>
+
+    <label>Frutta secca (2):</label><br>
+    <input type="text" class="frutta_secca"><br><input type="text" class="frutta_secca"><br>
+
+    <label>Carne (2):</label><br>
+    <input type="text" class="carne"><br><input type="text" class="carne"><br>
+
+    <label>Pesce (2):</label><br>
+    <input type="text" class="pesce"><br><input type="text" class="pesce"><br>
+
+    <label>Uova/Latticini (2):</label><br>
+    <input type="text" class="uova_latticini"><br><input type="text" class="uova_latticini"><br>
+  </form>
+
+  <button onclick="salvaPreferenze()">Salva e vai al menù</button>
+
+  <script src="database_nutrizionale_100.js"></script>
+  <script src="funzioni.js"></script>
+</body>
+</html>
