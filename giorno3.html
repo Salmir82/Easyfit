@@ -1,16 +1,111 @@
-
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Mercoledì</title>
-  <link rel="stylesheet" href="stile.css">
+  <title>Menù del Mercoledì</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+    }
+    .pasto {
+      margin-bottom: 25px;
+      padding: 15px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .pasto h2 {
+      color: #16a085;
+    }
+    ul {
+      margin-top: 10px;
+    }
+  </style>
 </head>
 <body>
   <h1>Menù di Mercoledì</h1>
-  <div id="contenuto_3">
-    <!-- Qui sarà generato dinamicamente il menù con ingredienti e nutrienti -->
-  </div>
+  <div id="contenuto_3"></div>
+
+  <script>
+    const preferenze = JSON.parse(localStorage.getItem("preferenze")) || {};
+
+    function getPreferito(categoria, indice, defaultValue) {
+      return (preferenze[categoria] && preferenze[categoria][indice]) || defaultValue;
+    }
+
+    const menu = {
+      "Colazione": {
+        piatto: `Pane integrale con formaggio fresco e frutta`,
+        ingredienti: [
+          getPreferito("cereali", 0, "Pane integrale") + " - 60g",
+          getPreferito("latticini", 1, "Formaggio fresco") + " - 40g",
+          getPreferito("frutta", 1, "Pera") + " - 150g"
+        ]
+      },
+      "Spuntino": {
+        piatto: `Frutta secca e frutta fresca`,
+        ingredienti: [
+          getPreferito("frutta_secca", 1, "Noci") + " - 15g",
+          getPreferito("frutta", 2, "Banana") + " - 100g"
+        ]
+      },
+      "Pranzo": {
+        piatto: `Riso con pesce e verdure`,
+        ingredienti: [
+          getPreferito("cereali", 1, "Riso integrale") + " - 80g",
+          getPreferito("pesce", 0, "Salmone") + " - 100g",
+          getPreferito("verdura", 2, "Broccoli") + " - 200g",
+          "Olio extravergine d'oliva - 10g"
+        ]
+      },
+      "Merenda": {
+        piatto: `Yogurt con frutta`,
+        ingredienti: [
+          getPreferito("latticini", 0, "Yogurt") + " - 125g",
+          getPreferito("frutta", 0, "Mela") + " - 100g"
+        ]
+      },
+      "Cena": {
+        piatto: `Uova e insalata con pane integrale`,
+        ingredienti: [
+          getPreferito("uova_latticini", 1, "Uova") + " - 2 unità",
+          getPreferito("verdura", 3, "Carote") + " - 150g",
+          "Pane integrale - 40g",
+          "Olio extravergine d'oliva - 10g"
+        ]
+      }
+    };
+
+    const contenitore = document.getElementById("contenuto_3");
+
+    for (const [pasto, dettagli] of Object.entries(menu)) {
+      const div = document.createElement("div");
+      div.classList.add("pasto");
+
+      const titolo = document.createElement("h2");
+      titolo.textContent = pasto;
+      div.appendChild(titolo);
+
+      const piatto = document.createElement("p");
+      piatto.textContent = `Piatto: ${dettagli.piatto}`;
+      div.appendChild(piatto);
+
+      const lista = document.createElement("ul");
+      dettagli.ingredienti.forEach(ingrediente => {
+        const li = document.createElement("li");
+        li.textContent = ingrediente;
+        lista.appendChild(li);
+      });
+
+      div.appendChild(lista);
+      contenitore.appendChild(div);
+    }
+  </script>
 </body>
 </html>
-    
