@@ -1,16 +1,86 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Lunedì</title>
-  <link rel="stylesheet" href="stile.css">
+  <title>Menù Lunedì</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; background-color: #f5f5f5; }
+    h1 { color: #2e7d32; }
+    .pasto { margin-bottom: 20px; padding: 10px; background-color: #ffffff; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .pasto h2 { margin-bottom: 5px; }
+    ul { margin: 0; padding-left: 20px; }
+  </style>
 </head>
 <body>
-  <h1>Menù di Lunedì</h1>
-  <div id="contenuto_1">
-    <!-- Qui sarà generato dinamicamente il menù con ingredienti e nutrienti -->
-  </div>
+  <h1>Menù Lunedì</h1>
+  <div id="contenuto_1"></div>
+
+  <script>
+    // Recupera gli alimenti preferiti dal localStorage
+    const preferiti = JSON.parse(localStorage.getItem('preferenze')) || {};
+
+    const menuLunedi = {
+      colazione: {
+        titolo: "Colazione",
+        piatto: "Pane integrale con marmellata e frutta fresca",
+        ingredienti: [
+          "2 fette di pane integrale",
+          "1 cucchiaio di marmellata",
+          preferiti.frutta1 || "1 banana",
+          preferiti.frutta2 || "1 mela"
+        ]
+      },
+      spuntino: {
+        titolo: "Spuntino",
+        piatto: "Frutta secca + frutta fresca",
+        ingredienti: [
+          preferiti.frutta3 || "1 arancia",
+          preferiti.frutta_secca1 || "10 mandorle"
+        ]
+      },
+      pranzo: {
+        titolo: "Pranzo",
+        piatto: "Pasta con verdure e proteine",
+        ingredienti: [
+          "80g pasta integrale",
+          preferiti.verdura1 || "spinaci",
+          preferiti.carne1 || "petto di pollo"
+        ]
+      },
+      merenda: {
+        titolo: "Merenda",
+        piatto: "Yogurt + frutta secca",
+        ingredienti: [
+          "125g yogurt bianco",
+          preferiti.frutta_secca2 || "10 noci"
+        ]
+      },
+      cena: {
+        titolo: "Cena",
+        piatto: "Pesce con verdure e pane integrale",
+        ingredienti: [
+          preferiti.pesce1 || "salmone",
+          preferiti.verdura2 || "broccoli",
+          "1 fetta di pane integrale"
+        ]
+      }
+    };
+
+    const contenitore = document.getElementById("contenuto_1");
+
+    for (const pastoKey in menuLunedi) {
+      const pasto = menuLunedi[pastoKey];
+      const div = document.createElement("div");
+      div.className = "pasto";
+      div.innerHTML = `
+        <h2>${pasto.titolo}</h2>
+        <p><strong>${pasto.piatto}</strong></p>
+        <ul>
+          ${pasto.ingredienti.map(ingr => `<li>${ingr}</li>`).join("")}
+        </ul>
+      `;
+      contenitore.appendChild(div);
+    }
+  </script>
 </body>
 </html>
-    
