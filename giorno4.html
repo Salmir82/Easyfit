@@ -1,16 +1,93 @@
-
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Giovedì</title>
-  <link rel="stylesheet" href="stile.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giorno 4 - Giovedì</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .pasto {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    ul {
+      margin: 5px 0 10px 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Menù di Giovedì</h1>
-  <div id="contenuto_4">
-    <!-- Qui sarà generato dinamicamente il menù con ingredienti e nutrienti -->
+  <h1>Menù del Giorno 4 – Giovedì</h1>
+
+  <div class="pasto" id="colazione">
+    <h2>Colazione</h2>
+    <p><strong>Piatto:</strong> Pane integrale con marmellata e kefir</p>
+    <ul>
+      <li>50g pane integrale</li>
+      <li>1 cucchiaio marmellata (circa 20g)</li>
+      <li>150ml kefir</li>
+    </ul>
   </div>
+
+  <div class="pasto" id="spuntino">
+    <h2>Spuntino Mattina</h2>
+    <p><strong>Piatto:</strong> Frutta fresca e frutta secca</p>
+    <ul>
+      <li>1 frutto (es. mela, banana, arancia...)</li>
+      <li>15g frutta secca (es. noci, mandorle...)</li>
+    </ul>
+  </div>
+
+  <div class="pasto" id="pranzo">
+    <h2>Pranzo</h2>
+    <p><strong>Piatto:</strong> Pasta integrale con verdure e petto di pollo</p>
+    <ul>
+      <li>70g pasta integrale</li>
+      <li>100g petto di pollo</li>
+      <li>100g verdure (es. broccoli, spinaci...)</li>
+      <li>1 cucchiaio olio extravergine d'oliva</li>
+    </ul>
+  </div>
+
+  <div class="pasto" id="merenda">
+    <h2>Merenda</h2>
+    <p><strong>Piatto:</strong> Yogurt naturale con fiocchi d’avena</p>
+    <ul>
+      <li>125g yogurt naturale</li>
+      <li>20g fiocchi d’avena</li>
+    </ul>
+  </div>
+
+  <div class="pasto" id="cena">
+    <h2>Cena</h2>
+    <p><strong>Piatto:</strong> Insalata mista con uova e pane</p>
+    <ul>
+      <li>2 uova</li>
+      <li>150g insalata mista (es. lattuga, carote, pomodori...)</li>
+      <li>1 cucchiaio olio extravergine d’oliva</li>
+      <li>40g pane integrale</li>
+    </ul>
+  </div>
+
+  <script>
+    // Inserisce automaticamente alimenti preferiti dalla dashboard
+    const preferiti = JSON.parse(localStorage.getItem("preferenzeAlimenti")) || {};
+    document.querySelectorAll("li").forEach(li => {
+      for (const cat in preferiti) {
+        preferiti[cat].forEach(pref => {
+          if (li.innerText.toLowerCase().includes("es.")) {
+            li.innerHTML = li.innerHTML.replace(/es\..*/, pref);
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
-    
