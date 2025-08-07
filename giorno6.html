@@ -1,16 +1,94 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Sabato</title>
-  <link rel="stylesheet" href="stile.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giorno 6 - Sabato</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .pasto {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    ul {
+      margin: 5px 0 10px 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Menù di Sabato</h1>
-  <div id="contenuto_6">
-    <!-- Qui sarà generato dinamicamente il menù con ingredienti e nutrienti -->
+  <h1>Menù del Giorno 6 – Sabato</h1>
+
+  <div class="pasto" id="colazione">
+    <h2>Colazione</h2>
+    <p><strong>Piatto:</strong> Pane integrale con marmellata e kefir</p>
+    <ul>
+      <li>40g pane integrale</li>
+      <li>15g marmellata senza zuccheri aggiunti</li>
+      <li>200ml kefir</li>
+      <li>1 frutto (es. banana, mela...)</li>
+    </ul>
   </div>
+
+  <div class="pasto" id="spuntino">
+    <h2>Spuntino Mattina</h2>
+    <p><strong>Piatto:</strong> Frutta fresca + frutta secca</p>
+    <ul>
+      <li>1 frutto</li>
+      <li>15g frutta secca (es. noci, mandorle...)</li>
+    </ul>
+  </div>
+
+  <div class="pasto" id="pranzo">
+    <h2>Pranzo</h2>
+    <p><strong>Piatto:</strong> Couscous integrale con verdure e legumi</p>
+    <ul>
+      <li>70g couscous integrale</li>
+      <li>100g legumi cotti (es. ceci, lenticchie...)</li>
+      <li>100g verdure (es. zucchine, peperoni...)</li>
+      <li>1 cucchiaio olio extravergine d’oliva</li>
+    </ul>
+  </div>
+
+  <div class="pasto" id="merenda">
+    <h2>Merenda</h2>
+    <p><strong>Piatto:</strong> Yogurt con frutta</p>
+    <ul>
+      <li>150g yogurt naturale</li>
+      <li>1 frutto</li>
+    </ul>
+  </div>
+
+  <div class="pasto" id="cena">
+    <h2>Cena</h2>
+    <p><strong>Piatto:</strong> Omelette con contorno e pane integrale</p>
+    <ul>
+      <li>2 uova</li>
+      <li>150g verdure cotte (es. spinaci, bietole...)</li>
+      <li>40g pane integrale</li>
+      <li>1 cucchiaio olio extravergine d’oliva</li>
+    </ul>
+  </div>
+
+  <script>
+    // Sostituzione automatica con preferenze salvate
+    const preferiti = JSON.parse(localStorage.getItem("preferenzeAlimenti")) || {};
+    document.querySelectorAll("li").forEach(li => {
+      for (const cat in preferiti) {
+        preferiti[cat].forEach(pref => {
+          if (li.innerText.toLowerCase().includes("es.")) {
+            li.innerHTML = li.innerHTML.replace(/es\..*/, pref);
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
-    
