@@ -1,16 +1,91 @@
-
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <title>Domenica</title>
-  <link rel="stylesheet" href="stile.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Giorno 7 - Domenica</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .pasto {
+      margin-bottom: 20px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    ul {
+      margin: 5px 0 10px 20px;
+    }
+  </style>
 </head>
 <body>
-  <h1>Menù di Domenica</h1>
-  <div id="contenuto_7">
-    <!-- Qui sarà generato dinamicamente il menù con ingredienti e nutrienti -->
+  <h1>Menù del Giorno 7 – Domenica</h1>
+
+  <div class="pasto" id="colazione">
+    <h2>Colazione</h2>
+    <p><strong>Piatto:</strong> Yogurt con frutta fresca e fiocchi d'avena</p>
+    <ul>
+      <li>200g yogurt naturale</li>
+      <li>30g fiocchi d’avena</li>
+      <li>1 frutto fresco (es. mela, banana...)</li>
+      <li>1 cucchiaino di semi (es. chia, lino...)</li>
+    </ul>
   </div>
+
+  <div class="pasto" id="spuntino">
+    <h2>Spuntino Mattina</h2>
+    <p><strong>Piatto:</strong> Frutta fresca + frutta secca</p>
+    <ul>
+      <li>1 frutto</li>
+      <li>15g frutta secca (es. noci, mandorle...)</li>
+    </ul>
+  </div>
+
+  <div class="pasto" id="pranzo">
+    <h2>Pranzo</h2>
+    <p><strong>Piatto:</strong> Lasagne vegetali + insalata</p>
+    <ul>
+      <li>1 porzione di lasagne (pasta, verdure, ricotta/formaggio leggero)</li>
+      <li>100g insalata mista con 1 cucchiaio olio extravergine</li>
+    </ul>
+  </div>
+
+  <div class="pasto" id="merenda">
+    <h2>Merenda</h2>
+    <p><strong>Piatto:</strong> Pane integrale con hummus</p>
+    <ul>
+      <li>40g pane integrale</li>
+      <li>30g hummus di ceci</li>
+    </ul>
+  </div>
+
+  <div class="pasto" id="cena">
+    <h2>Cena</h2>
+    <p><strong>Piatto:</strong> Pesce al forno con verdure cotte</p>
+    <ul>
+      <li>150g pesce (es. orata, salmone...)</li>
+      <li>150g verdure cotte (es. spinaci, broccoli...)</li>
+      <li>1 cucchiaio olio extravergine d’oliva</li>
+    </ul>
+  </div>
+
+  <script>
+    // Sostituzione automatica degli esempi con preferenze utente
+    const preferiti = JSON.parse(localStorage.getItem("preferenzeAlimenti")) || {};
+    document.querySelectorAll("li").forEach(li => {
+      for (const categoria in preferiti) {
+        preferiti[categoria].forEach(pref => {
+          if (li.innerText.toLowerCase().includes("es.")) {
+            li.innerHTML = li.innerHTML.replace(/es\..*/, pref);
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>
-    
