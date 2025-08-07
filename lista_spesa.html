@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Lista della Spesa Settimanale</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      background-color: #f8f8f8;
+    }
+    h1 {
+      color: #2a7f62;
+      text-align: center;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      margin-bottom: 8px;
+      padding: 6px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .button {
+      margin-top: 20px;
+      display: block;
+      background-color: #2a7f62;
+      color: white;
+      padding: 10px 15px;
+      text-align: center;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .button:hover {
+      background-color: #256d54;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🛒 Lista della Spesa Settimanale</h1>
+  <ul id="lista-spesa">
+    <li>Caricamento...</li>
+  </ul>
+
+  <a href="index.html" class="button">🏠 Torna alla Dashboard</a>
+
+  <script>
+    // Funzione per recuperare i menu giornalieri salvati
+    function getMenuGiornalieri() {
+      const menu = [];
+      for (let i = 1; i <= 7; i++) {
+        const giorno = localStorage.getItem(`giorno${i}`);
+        if (giorno) {
+          try {
+            const dati = JSON.parse(giorno);
+            menu.push(...dati);
+          } catch (e) {
+            console.warn(`Errore parsing giorno${i}`);
+          }
+        }
+      }
+      return menu;
+    }
+
+    function estraiListaSpesa() {
+      const lista = {};
+      const menu = getMenuGiornalieri();
+
+      menu.forEach(pasto => {
+        if (Array.isArray(pasto.ingredienti)) {
+          pasto.ingredienti.forEach(ingrediente => {
+            const nome = ingrediente.nome;
+            const quantita = parseFloat(ingrediente.quantita);
+
+            if (!lista[nome]) {
+              lista[nome] = 0;
+            }
+            lista[nome] += quantita;
+          });
+        }
+      });
+
+      return lista;
+    }
+
+    // Mostra la lista
+    const ul = document.getElementById("lista-spesa");
+    ul.innerHTML = "";
+    const spesa = estraiListaSpesa();
+
+    if (Object.keys(spesa).length === 0) {
+      ul.innerHTML = "<li>Nessun ingrediente trovato nei menu salvati.</li>";
+    } else {
+      Object.entries(spesa).forEach(([ingrediente, quantita]) => {
+        const li = document.createElement("li");
+        li.textContent = `${ingrediente}: ${quantita.toFixed(0)} g`;
+        ul.appendChild(li);
+      });
+    }
+  </script>
+
+</body>
+</html>
